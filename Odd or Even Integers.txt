@@ -1,0 +1,191 @@
+//Hersh Bhadra: This program will read, determine, and print whether an integer is odd or even.
+
+import java.util.Scanner; 
+// program uses Scanner
+
+public class OddEven 
+{
+	public static void main( String args[] ) 
+	// main method begins program execution
+		{
+		Scanner input = new Scanner( System.in );
+		// create Scanner to obtain input from command window
+		int integer;
+		// number to be read and determined
+		System.out.print( "Enter integer: " ); 
+		// prompt for input
+		integer = input.nextInt(); 
+		// read integer input by user
+		if ( integer % 2 == 0 )
+		// using remainder operator with equality operator
+			System.out.println( "Integer is even" );
+		if ( integer % 2 != 0 )
+			System.out.println( "Integer is odd" );
+		}//end main
+}//end class OddEven
+
+
+//Hersh Bhadra: This program will generate an invoice for a hardware store.
+public class Invoice 
+{
+	public String partNumber;//instance variables that store values
+	public String partDescription;//instance variables that store values
+	public int quantity;//instance variables that store values
+	public double priceOfItem;//instance variables that store values
+	
+	public Invoice( String part, String description, int amount, double price ) //constructor that initializes the four instance variables
+	{
+		partNumber = part; //initialize partNumber
+		partDescription = description; //initialize description
+	
+		if ( amount > 0.0 )//validate that amount > 0.0
+			quantity = amount; //if it is not, quantity is initialized to the default value 0.0
+		if ( price > 0.0 )
+			priceOfItem = price;
+	}//end public Invoice
+	
+	public void setPartNumber( String part )//method to set part number
+	{	
+		partNumber = part;
+	}//end method to set part number
+	public String getPartNumber()//method to retrieve the part number
+	{
+		return partNumber;
+	}//end method to retrieve part number
+	public void setPartDescription( String description )//method to set part description
+	{
+		partDescription = description; 
+	}//end method
+	public String getPartDescription()//method to retrieve description
+	{
+		return partDescription;
+	}//end method
+	public void setQuantity( int amount )
+	{
+		if ( amount > 0.0 ) // determine whether amount > 0.0
+			quantity = amount;// validate that amount > 0.0
+		if ( amount <= 0.0 )//determine whether amount <= 0.0
+			quantity = 0;//if quantity 0 or -ve, quantity is set to 0
+	}//end method
+	public int getQuantity()
+	{
+		return quantity;
+	}//end method
+	public void setPriceOfItem( double price )
+	{
+		if ( price > 0.0 )// determine whether price > 0.0
+			priceOfItem = price;// validate that price > 0.0
+		if ( price <= 0.0 )//determine whether price <= 0.0
+			priceOfItem = 0.0;//if price 0 or -ve, price is set to 0
+	}//end method
+	public double getPriceOfItem()
+	{
+		return priceOfItem;
+	}//end method
+	public double getInvoiceAmount()//method to retrieve Invoice Amount
+	{
+		return getQuantity() * getPriceOfItem();//multiplies the quantity by the price per item to get Invoice amount
+	}//end method getInvoiceAmount
+}//end class Invoice 
+
+
+//Hersh Bhadra: This program will demonstrate the class Invoice's capabilities
+public class InvoiceTest 
+{
+	public static void main( String args[] )
+	//main method begins execution of Java application
+	{
+		Invoice item1 = new Invoice ( "001", "Screwdriver", 10, 9.99 );//Part Number, description, quantity, price
+		System.out.println( "Hardware Store Invoice\n" ); 
+		System.out.printf( "Part Number: %s\n", item1.getPartNumber() );
+		System.out.printf( "Description: %s\n",
+				item1.getPartDescription() );
+		System.out.printf( "Quantity: %d\n", item1.getQuantity() );
+		System.out.printf( "Price: %.2f\n", item1.getPriceOfItem() ); /*The .2 between % and f represents the number of decimal places (2) 
+		 * that should be output
+		 */
+		System.out.printf( "Total Cost: %.2f\n\n",
+				item1.getInvoiceAmount() );
+		//Code above will display information in item1
+		
+		Invoice item2 = new Invoice ( "002", "Screws", 250, 1.99 );//Part Number, description, quantity, price
+		System.out.printf( "Part Number: %s\n", item2.getPartNumber() );
+		System.out.printf( "Description: %s\n",
+				item2.getPartDescription() );
+		System.out.printf( "Quantity: %d\n", item2.getQuantity() );
+		System.out.printf( "Price: %.2f\n", item2.getPriceOfItem() );/*The .2 between % and f represents the number of decimal places (2) 
+		 * that should be output
+		 */
+		System.out.printf( "Total Cost: %.2f\n\n",
+				item2.getInvoiceAmount() );
+		
+		Invoice item3 = new Invoice ( "003", "Paints", 2, -1 );//Part Number, description, quantity, price
+		System.out.printf( "Part Number: %s\n", item3.getPartNumber() );
+		System.out.printf( "Description: %s\n",
+				item3.getPartDescription() );
+		System.out.printf( "Quantity: %d\n", item3.getQuantity() );
+		System.out.printf( "Price: %.2f\n", item3.getPriceOfItem() );/*The .2 between % and f represents the number of decimal places (2) 
+		 * that should be output
+		 */
+		System.out.printf( "Total Cost: %.2f\n\n",
+				item3.getInvoiceAmount() );
+	}//end main
+}//end class InvoiceTest
+
+
+/*Hersh Bhadra: This program will input account information, display new balance, 
+and determine whether the new balance exceeds the customers credit limit.
+*/ 
+
+import java.util.Scanner; 
+// program uses Scanner
+
+public class Credit
+{
+	public void calculateCredit()
+	{
+		Scanner input = new Scanner( System.in );// create Scanner to obtain input from command window
+		
+		int accountNumber;
+		int beginningBalance;
+		int chargesForMonth;
+		int creditsApplied;
+		int creditLimit;
+		int newBalance;
+		//instance variables that store values
+		
+		System.out.print( "Enter Account Number OR '-1' to QUIT: " );
+		accountNumber = input.nextInt(); // read account number
+		
+		while ( accountNumber != -1 )//loop is required for user to enter next multiple users without restarting the program
+		{
+		
+		System.out.print( "Enter Current Balance: " );
+		beginningBalance = input.nextInt(); // read beginning balance
+		
+		System.out.print( "Enter total of all items charged this month: " );
+		chargesForMonth = input.nextInt(); // read charges
+		
+		System.out.print( "Enter total of all credits applied this month: " );
+		creditsApplied = input.nextInt(); // read credits
+		
+		System.out.print( "Enter Credit Limit: " );
+		creditLimit = input.nextInt(); // read credit limit
+		
+		newBalance = (beginningBalance + chargesForMonth) - creditsApplied;//calculate new balance
+		System.out.printf( "New balance is %d\n\n", newBalance );//display new balance
+		
+		if ( newBalance > creditLimit )//conditional to check whether credit limit exceeded
+			System.out.println( "Credit limit exceeded\n " );
+		
+		System.out.print( "Enter Account Number OR '-1' to QUIT: " );
+		accountNumber = input.nextInt(); // read next account number
+		}//end while
+	}//end method Calculate Credit
+	
+	public static void main(String args[])//main method begins execution of Java application
+	{
+		Credit application = new Credit();
+		application.calculateCredit();
+	}//end main
+}//end class Credit
